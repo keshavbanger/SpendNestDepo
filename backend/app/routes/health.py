@@ -13,6 +13,6 @@ def check_health():
     """
     return {
         "status": "success",
-        "app_name": "FlowShield API",
+        "app_name": "SpendNest API",
         "message": "The backend server is running perfectly!"
     }

@@ -1,8 +1,8 @@
-# FlowShield 🛡️
+# SpendNest 🏦
 
-FlowShield is an intelligent, full-stack personal finance analytics engine. It transforms raw, messy bank statement CSVs into a beautifully visualized, actionable financial dashboard in milliseconds. 
+SpendNest is an intelligent, full-stack personal finance analytics engine. It transforms raw, messy bank statement CSVs into a beautifully visualized, actionable financial dashboard in milliseconds. 
 
-Built for speed and simplicity, FlowShield automatically categorizes transactions, forecasts future income using moving averages, and recommends a "safe-to-spend" balance to help users master their finances.
+Built for speed and simplicity, SpendNest automatically categorizes transactions, forecasts future income using moving averages, and recommends a "safe-to-spend" balance to help users master their finances.
 
 ## ✨ Key Features
 - **Smart CSV Parsing:** Uses Pandas to normalize varied, unstructured bank statement formats into a standardized schema.

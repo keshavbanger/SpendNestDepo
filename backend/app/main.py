@@ -8,8 +8,8 @@ from app.routes.analytics import router as analytics_router
 
 # Initialize FastAPI application
 app = FastAPI(
-    title="FlowShield API",
-    description="Backend API for the FlowShield personal finance dashboard",
+    title="SpendNest API",
+    description="Backend API for the SpendNest personal finance dashboard",
     version="1.0.0"
 )
 
