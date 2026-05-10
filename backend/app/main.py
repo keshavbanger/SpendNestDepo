@@ -1,0 +1,31 @@
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+# Import our modular routers
+from app.routes.health import router as health_router
+from app.routes.upload import router as upload_router
+from app.routes.analytics import router as analytics_router
+
+# Initialize FastAPI application
+app = FastAPI(
+    title="FlowShield API",
+    description="Backend API for the FlowShield personal finance dashboard",
+    version="1.0.0"
+)
+
+# Configure CORS to allow our React frontend to communicate with this backend
+# For beginners: CORS (Cross-Origin Resource Sharing) is a security feature
+# that restricts web applications from making requests to a different domain.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"], # Vite's default dev server ports
+    allow_credentials=True,
+    allow_methods=["*"], # Allow all HTTP methods (GET, POST, etc.)
+    allow_headers=["*"], # Allow all headers
+)
+
+# Register (include) our routers
+# This tells FastAPI to use the routes we've defined in other files
+app.include_router(health_router, prefix="/api")
+app.include_router(upload_router, prefix="/api")
+app.include_router(analytics_router, prefix="/api")
