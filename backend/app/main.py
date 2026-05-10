@@ -18,7 +18,7 @@ import os
 # Configure CORS
 # Note: allow_credentials=True cannot be used with allow_origins=["*"]
 cors_origins_raw = os.getenv("CORS_ORIGINS", "*")
-origins = cors_origins_raw.split(",")
+origins = [o.strip() for o in cors_origins_raw.split(",")]
 
 # If we are using a wildcard, we must set allow_credentials to False
 allow_all = "*" in origins
@@ -36,3 +36,14 @@ app.add_middleware(
 app.include_router(health_router, prefix="/api")
 app.include_router(upload_router, prefix="/api")
 app.include_router(analytics_router, prefix="/api")
+
+@app.on_event("startup")
+async def startup_event():
+    print("🚀 SpendNest API is starting up...")
+    print("Available Routes:")
+    for route in app.routes:
+        print(f"  {route.methods} {route.path}")
+
+@app.get("/")
+def read_root():
+    return {"message": "SpendNest API is alive!", "version": "1.0.0"}
