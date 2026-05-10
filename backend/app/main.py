@@ -13,15 +13,18 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Configure CORS to allow our React frontend to communicate with this backend
-# For beginners: CORS (Cross-Origin Resource Sharing) is a security feature
-# that restricts web applications from making requests to a different domain.
+import os
+
+# Configure CORS
+# In production, you should specify the exact frontend URL
+origins = os.getenv("CORS_ORIGINS", "*").split(",")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"], # Vite's default dev server ports
+    allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"], # Allow all HTTP methods (GET, POST, etc.)
-    allow_headers=["*"], # Allow all headers
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Register (include) our routers
