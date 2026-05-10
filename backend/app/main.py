@@ -16,13 +16,17 @@ app = FastAPI(
 import os
 
 # Configure CORS
-# In production, you should specify the exact frontend URL
-origins = os.getenv("CORS_ORIGINS", "*").split(",")
+# Note: allow_credentials=True cannot be used with allow_origins=["*"]
+cors_origins_raw = os.getenv("CORS_ORIGINS", "*")
+origins = cors_origins_raw.split(",")
+
+# If we are using a wildcard, we must set allow_credentials to False
+allow_all = "*" in origins
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
-    allow_credentials=True,
+    allow_credentials=not allow_all,
     allow_methods=["*"],
     allow_headers=["*"],
 )
