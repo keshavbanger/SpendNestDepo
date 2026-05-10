@@ -18,7 +18,11 @@ import os
 # Configure CORS
 # Note: allow_credentials=True cannot be used with allow_origins=["*"]
 cors_origins_raw = os.getenv("CORS_ORIGINS", "*")
-origins = [o.strip() for o in cors_origins_raw.split(",")]
+origins = [o.strip().rstrip('/') for o in cors_origins_raw.split(",")]
+
+# Always allow common local development origins if not in a strict production mode
+if "*" not in origins:
+    origins.extend(["http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:3000"])
 
 # If we are using a wildcard, we must set allow_credentials to False
 allow_all = "*" in origins
